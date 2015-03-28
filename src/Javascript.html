@@ -1,0 +1,36 @@
+<!-- Load the jQuery and jQuery UI libraries. -->
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+<!-- Custom client-side JavaScript code. -->
+<script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+  
+   $(function() {
+$( ".accordion" ).accordion({
+heightStyle: "content",
+collapsible: true,
+active: false,
+});
+});
+
+  function save(f){
+      google.script.run.guardar(f);
+      alert('La información ha sido guardada satisfactoriamente');
+  }
+  
+  function saveCombustibles(f,i){
+    
+    var deps = $("input[name=dep]").toArray();
+    deps[i].value=document.getElementById('depComun').selectedIndex;    
+    google.script.run.guardarCombustibles(f);
+    alert('La información ha sido guardada satisfactoriamente');
+  }
+   $(function() {
+$( document ).tooltip();
+});
+
+
+</script>

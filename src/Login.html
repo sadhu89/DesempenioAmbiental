@@ -1,0 +1,58 @@
+<?!= include('Estilos'); ?>
+<script>
+
+    
+  function cambiar(){
+    var i=document.getElementById('depComun').selectedIndex;
+    var url = document.getElementById('url').value;
+    if(i==0)
+      document.getElementById('enlace').setAttribute("href",'#');
+    else
+      document.getElementById('enlace').setAttribute("href", url+"?page=Pagina&"+"dep="+i);
+  }
+  
+
+</script>
+
+
+
+<img id='logo' src='http://www.revistaleadership.com/logo_petroperu%20copia.jpg'/>
+
+<h1 id='titulo'>Reporte de Desempeño Ambiental</h1>
+
+<HR width=95% align="center"> 
+
+<label style='margin-left:25em;'>Dependencia Operativa: </label>
+<select name='depComun' id='depComun' onchange='cambiar()'>
+  <option value="0">Seleccione opción</option>
+  <option value="1">Conchán</option>
+  <option value="2">Comerciales</option>
+  <option value="3">Oficina Principal</option>
+  <option value="4">Oleoducto</option>
+  <option value="5">Selva</option>
+  <option value="6">Talara</option>
+</select>
+<a href='#' id='enlace'> <input  type='button' name='button' value='Entrar'></a>
+
+
+<?var url = getScriptUrl();?><input type='text' id='url' value='<?=url?>' hidden />
+
+<div class='centrar'>
+<h3>Compatibilidad</h3>
+<ul>
+  <li>Para que la herramienta funcione correctamente debe ser utilizada con el navegador Firefox actualizado a su ultima versión, de lo contrario llamar a Mesa de Ayuda al 77777.</li>
+  <li><p>La presente herramienta ha sido diseñadada para ser compatible con los lineamientos e indicadores de la Global Reporting Initiative(GRI).</p></li><br>
+</ul>
+
+<h3>Contacto</h3>
+<p>Aunque la herramienta ha sido diseñada para ser facilmente por los usuarios, de existir preguntas y/o sugerencias sobre su contenido, por favor contactar con el Departamento de Desarrollo Sostenible al correo: <a href="mailto:apinillos@petroperu.com.pe?Subject=Contacto%20Reporte%20Desempeño%20Ambiental" target="_top">apinillos@petroperu.com.pe</a></p>
+
+</div>
+
+<table width="100%"  border="0" cellspacing="15%" cellpadding="0">
+  <tr>
+    <td width="25%" align="left" class="opmenuizq2"></td>
+    <td width="75%" align="right" class="textopiep">PETRÓLEOS DEL PERÚ - PETROPERÚ S.A. | Ministerio de Energía y Minas | República del Perú<img src="http://www.petroperu.com.pe/portalweb/UpLoad/UpLoaded/JPG/escudo.jpg" width="19" height="20" alt="PERU"/>&nbsp;&nbsp;<br />Central telefónica: 614 5000 - Oficina Principal avenida Enrique Canaval Moreyra 150. Lima 27, Perú.<br/><a href="http://www.petroperu.com.pe/portalweb/Main.asp?Seccion=93" title="Política de protección de datos e información legal ">Política de protección de datos e información legal</a> | © Copyright 2008-2014 </td>
+  </tr>
+</table>
+

@@ -1,0 +1,416 @@
+<html>
+<?!= include('Estilos'); ?>
+
+<?var meses=new Array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre');
+  var dependencias=new Array('NA','Conchán','Comerciales','Oficina Principal', 'Oleoducto','Selva','Talara');?>
+  
+<img class='ajuste' id='logo' src='http://www.revistaleadership.com/logo_petroperu%20copia.jpg'/>
+
+<h1 id='cab' class='ajuste'><?=dependencias[dep]?></h1>
+<!--<p>Persona de contacto: <input type='text' name=contacto></p>
+<p>Teléfono: <input type='text' name=telf></p>
+<p>Correo: <input type='text' name=correo></p>-->
+
+
+
+
+<div id="tabs">
+    
+  <ul>
+    <li><a href="#tabs-1">General</a></li>
+    <li><a href="#tabs-2">Combustibles</a></li>
+    <li><a href="#tabs-3">Energia A</a></li>
+    <li><a href="#tabs-4">Energia B</a></li>
+    <li><a href="#tabs-5">Agua</a></li>
+    <li><a href="#tabs-6">Papel</a></li>
+    <li><a href="#tabs-7">Residuos</a></li>
+    <li><a href="#tabs-8">Emisiones</a></li>
+    <li><a href="#tabs-9">Derrames</a></li>
+    <li><a href="#tabs-10">Efluentes</a></li>
+  </ul>
+  <div id="tabs-1">
+    <div class="accordion">
+        <? for(var i=0;i<12;i++){?>
+          <h3><?=meses[i]?></h3>
+          <div>
+            <form>
+                  <fieldset class='espacioVertical ajuste'>
+                    <legend>Numero de Trabajadores</legend>
+                    <p>Número de Trabajadores propios (Nº): <input title="Prueba1" type='text' name='a' id="propio" value='<?=(i+1<general.length)?general[i+1][2]:''?>'></p>
+                    <p>Número de Trabajadores por Locación de Servicios (Nº): <input title='Prueba2' type='text' name='b' value='<?=(i+1<general.length)?general[i+1][3]:''?>'></p>
+                  </fieldset>
+                  
+                  <fieldset class='espacioVertical ajuste'>
+                    <legend>Materia Prima Procesada</legend>
+                    <p><label>Petroleo crudo refinado: </label><span><input type='text' name='c' size='4' value='<?=(i+1<general.length)?general[i+1][4]:''?>'>t     <input type='text' name='d' size='4' value='<?=(i+1<general.length)?general[i+1][5]:''?>'>bbl</span></p>
+                    </fieldset>
+                  <fieldset class='espacioVertical ajuste'>
+                    <legend>Materia Prima Transportada</legend>
+                    <p><label>Petroleo crudo transportado por ductos: </label><span><input type='text' name='e' size='4' value='<?=(i+1<general.length)?general[i+1][6]:''?>'>t     <input type='text' name='f' size='4' value='<?=(i+1<general.length)?general[i+1][7]:''?>'>bbl</span></p>
+                  </fieldset>
+                   <fieldset class='espacioVertical ajuste'>
+                    <legend>Consideraciones/Aclaraciones</legend>
+                    <textarea class='cons' rows="3" cols="50" name='g' ><?=(i+1<general.length)?general[i+1][8]:''?></textarea> 
+                   </fieldset>
+                  <input type='hidden' name='hoja' value='General'>
+                  <input type='hidden' name='dep' value='<?=dep?>'>
+                  <input type='hidden' name='n' value='7'><br>
+                  <input type='hidden' name='mes' value='<?=(i+1)?>'>
+                  <input type='button' value='Guardar' onclick="save(this.parentNode)"/>
+                  
+            </form>
+          </div>
+        <?}?>
+        
+      </div>
+      
+  </div>
+  <div id="tabs-2">
+    <form>
+      
+      <?!= include('Meses');?>
+      <p>Tipo de combustible: 
+      <select name='tipo'>
+        <option value="0">Seleccione opción</option>
+        <optgroup label="Gasolina">
+          <option value="1">97 octanos</option>
+          <option value="2">95 octanos</option>
+          <option value="3">90 octanos</option>
+          <option value="4">84 octanos</option>
+        </optgroup>
+        <option value="5">Diesel B5</option>
+        <option value="6">Fuelóleo Reidual</option>
+        <option value="7">GLP</option>
+        <option value="8">Gas natural</option>
+      </select>
+      </p>
+      <input type='hidden' name='hoja' value='Combustibles'>
+      <input type='hidden' name='dep' value=''>
+      <p>Consumo (gal): <input type='text' name='consumo' /></p>
+      <input type='button' value='Guardar' onclick="saveCombustibles(this.parentNode,1)"/>
+    </form>
+  </div>
+  
+    <div id="tabs-3">
+  
+      <div class="accordion">
+        <? for(var i=0;i<12;i++){?>
+          <h3><?=meses[i]?></h3>
+          <div>
+            <form>
+              <?var j=(i+1<energia_a.length)?energia_a[i+1][2]:''?>
+              <p>Tipo de fuente primaria:
+              <select name='a'>
+                <option <?=(j=='')?'selected':''?> value="0">Seleccione opción</option>
+                <option <?=(j=="Diesel B5")?'selected':''?> value="Diesel B5">Diesel B5</option>
+                <option <?=(j=="Diesel B5 y Fuelóleo Residual")?'selected':''?> value="Diesel B5 y Fuelóleo Residual">Diesel B5 y Fuelóleo Residual</option>
+                <option <?=(j=="Biomasa")?'selected':''?> value="Biomasa">Biomasa</option>
+                <option <?=(j=="Eólica")?'selected':''?> value="Eólica">Eólica</option>
+                <option <?=(j=="Fuelóleo Residual")?'selected':''?> value="Fuelóleo Residual">Fuelóleo Residual</option>
+                <option <?=(j=="Gasolina")?'selected':''?> value="Gasolina">Gasolina</option>
+                <option <?=(j=="Gas Natural")?'selected':''?> value="Gas Natural">Gas Natural</option>
+                <option <?=(j=="Geotérmica")?'selected':''?> value="Geotérmica">Geotérmica</option>
+                <option <?=(j=="GLP")?'selected':''?> value="GLP">GLP</option>
+                <option <?=(j=="Hidroeléctrica")?'selected':''?> value="Hidroeléctrica">Hidroeléctrica</option>
+              </select>
+              </p>
+              
+              <p>Consumo de Energía Electrica Hora Punta(kWh): <input type='text' name='b' value='<?=(i+1<energia_a.length)?energia_a[i+1][3]:''?>'/></p>
+              <p>Consumo de Energía Electrica Fuera Punta(kWh): <input type='text' name='c' value='<?=(i+1<energia_a.length)?energia_a[i+1][4]:''?>'/></p>
+              
+              <fieldset class='espacioVertical ajuste'>
+                    <legend>Consideraciones/Aclaraciones</legend>
+                    <textarea class='cons' rows="3" cols="50" name='d' ><?=(i+1<energia_a.length)?energia_a[i+1][5]:''?></textarea> 
+                   </fieldset>
+                  <input type='hidden' name='hoja' value='Energia A'>
+                  <input type='hidden' name='dep' value='<?=dep?>'>
+                  <input type='hidden' name='n' value='4'><br>
+                  <input type='hidden' name='mes' value='<?=(i+1)?>'>
+                  <input type='button' value='Guardar' onclick="save(this.parentNode)"/>
+              
+            </form>
+          </div>
+        <?}?>
+        
+      </div>
+  </div>
+  
+  <div id="tabs-4">
+          <div class="accordion">
+        <? for(var i=0;i<12;i++){?>
+          <h3><?=meses[i]?></h3>
+          <div>
+            <form>
+              
+                <?var j=(i+1<energia_b.length)?energia_b[i+1][2]:''?>
+                <p>Tipo de fuente primaria:
+                <select name='a'>
+                  <option <?=(j=='')?'selected':''?> value=''>Seleccione opción</option>
+                  <option <?=(j=='Diesel B5')?'selected':''?> value="Diesel B5">Diesel B5</option>
+                  <option <?=(j=='Diesel B5 y Fuelóleo Residual')?'selected':''?> value="Diesel B5 y Fuelóleo Residual">Diesel B5 y Fuelóleo Residual</option>
+                  <option <?=(j=='Biomasa')?'selected':''?> value="Biomasa">Biomasa</option>
+                  <option <?=(j=='Eólica')?'selected':''?> value="Eólica">Eólica</option>
+                  <option <?=(j=='Fuelóleo Residual')?'selected':''?> value="Fuelóleo Residual">Fuelóleo Residual</option>
+                  <option <?=(j=='Gasolina')?'selected':''?> value="Gasolina">Gasolina</option>
+                  <option <?=(j=='Gas Natural')?'selected':''?> value="Gas Natural">Gas Natural</option>
+                  <option <?=(j=='Geotérmica')?'selected':''?> value="Geotérmica">Geotérmica</option>
+                  <option <?=(j=='GLP')?'selected':''?> value="GLP">GLP</option>
+                  <option <?=(j=='Hidroeléctrica')?'selected':''?> value="Hidroeléctrica">Hidroeléctrica</option>
+                  <option <?=(j=='Sistema Eléctrico Interconectado Nacional')?'selected':''?> value="Sistema Eléctrico Interconectado Nacional">Sistema Eléctrico Interconectado Nacional</option>
+                </select>
+                </p>
+                <p>Nombre de el/los Proveedores: <input type='text' name='b'value='<?=(i+1<energia_b.length)?energia_b[i+1][3]:''?>'/></p>
+                
+                <p>Consumo de Energía Electrica Hora Punta(kWh): <input type='text' name='c' value='<?=(i+1<energia_b.length)?energia_b[i+1][4]:''?>'/></p>
+                <p>Consumo de Energía Electrica Fuera Punta(kWh): <input type='text' name='d' value='<?=(i+1<energia_b.length)?energia_b[i+1][5]:''?>'/></p>
+                <p>Importe Total(S/. inc. IGV): <input type='text' name='e' value='<?=(i+1<energia_b.length)?energia_b[i+1][6]:''?>'/></p>
+                
+                <fieldset class='espacioVertical ajuste'>
+                    <legend>Consideraciones/Aclaraciones</legend>
+                    <textarea class='cons' rows="3" cols="50" name='f' ><?=(i+1<energia_b.length)?energia_b[i+1][7]:''?></textarea> 
+                   </fieldset>
+                
+                <input type='hidden' name='n' value='6'>
+                <input type='hidden' name='hoja' value='Energia B'>
+                <input type='hidden' name='dep' value='<?=dep?>'>
+                <input type='button' value='Guardar' onclick="save(this.parentNode)"/>
+                <input type='hidden' name='mes' value='<?=(i+1)?>'>
+              
+     
+              
+            </form>
+          </div>
+        <?}?>
+        
+      </div>
+
+      
+  </div>
+  
+  
+   <div id="tabs-5">
+          <div class="accordion">
+        <? for(var i=0;i<12;i++){?>
+          <h3><?=meses[i]?></h3>
+          <div>
+            <form>
+              <fieldset class='espacioVertical ajuste'>
+                <legend>Fuente N°1</legend>
+                <?var j=(i+1<energia_b.length)?energia_b[i+1][2]:''?>
+                <p>Tipo de fuente:
+                <select name='a'>
+                <option <?=(j=='')?'selected':''?> value=''>Seleccione opción</option>		
+                <option <?=(j=='Aguas superficiales procedente de humedales')?'selected':''?>value="Aguas superficiales procedente de humedales">Aguas superficiales procedente de humedales</option>
+                <option <?=(j=='Aguas superficiales procedente de ríos')?'selected':''?>value="Aguas superficiales procedente de ríos">Aguas superficiales procedente de ríos</option>
+                <option <?=(j=='Aguas superficiales procedente de lagos')?'selected':''?>value="Aguas superficiales procedente de lagos">Aguas superficiales procedente de lagos</option>
+                <option <?=(j=='Aguas superficiales procedente de océanos')?'selected':''?>value="Aguas superficiales procedente de océanos">Aguas superficiales procedente de océanos</option>
+                <option <?=(j=='Aguas subterráneas')?'selected':''?>value="Aguas subterráneas">Aguas subterráneas</option>
+                <option <?=(j=='Aguas pluviales captadas y almacenadas')?'selected':''?>value="Aguas pluviales captadas y almacenadas">Aguas pluviales captadas y almacenadas</option>
+                <option <?=(j=='Aguas residuales de la Empresa')?'selected':''?>value="Aguas residuales de la Empresa">Aguas residuales de la Empresa</option>
+                <option <?=(j=='Aguas residuales de otra organización')?'selected':''?>value="Aguas residuales de otra organización">Aguas residuales de otra organización</option>
+                <option <?=(j=='Suministro municipal o de otra empresa')?'selected':''?>value="Suministro municipal o de otra empresa">Suministro municipal o de otra empresa</option>
+                <option <?=(j=='Otras fuentes')?'selected':''?>value="Otras fuentes">Otras fuentes</option>
+                </select>
+                </p>
+                <p>Nombre de la fuente: <input type='text' name='b' value='<?=(i+1<agua.length)?agua[i+1][3]:''?>'/></p>
+                <p>Consumo de Agua (m3): <input type='text' name='c' value='<?=(i+1<agua.length)?agua[i+1][4]:''?>'/></p>
+                <p>Importe total (S/.): <input type='text' name='d' value='<?=(i+1<agua.length)?agua[i+1][5]:''?>'/></p>
+              </fieldset>
+              <fieldset class='espacioVertical ajuste'>
+                    <legend>Consideraciones/Aclaraciones</legend>
+                    <textarea class='cons' rows="3" cols="50" name='e' ><?=(i+1<agua.length)?agua[i+1][6]:''?></textarea> 
+                   </fieldset>
+              <input type='hidden' name='n' value='5'>
+              <input type='hidden' name='hoja' value='Agua'>
+              <input type='hidden' name='mes' value='<?=(i+1)?>'>
+              <input type='hidden' name='dep' value='<?=dep?>'><br>
+              <input type='button' value='Guardar' onclick="save(this.parentNode)"/>
+            </form>
+          </div>
+        <?}?>
+        
+      </div>
+
+      
+  </div>
+ 
+   <div id="tabs-6">
+  
+      <div class="accordion">
+        <? for(var i=0;i<12;i++){?>
+          <h3><?=meses[i]?></h3>
+          <div>
+            <form>
+              <fieldset class='espacioVertical ajuste'>
+                <legend>Papel Bond</legend>
+                <p>Consumo(resma): <input type='text' name='a' value='<?=(i+1<papel.length)?papel[i+1][2]:''?>'/></p>
+                <p>Importe Total(S/. inc. IGV): <input type='text' name='b' value='<?=(i+1<papel.length)?papel[i+1][3]:''?>'/></p>
+              </fieldset>
+              <fieldset class='espacioVertical ajuste'>
+                <legend>Cartuchos de tinta de impresora</legend>
+                <p>Consumo(unid.): <input type='text' name='c' value='<?=(i+1<papel.length)?papel[i+1][4]:''?>'/></p>
+                <p>Importe Total(S/. inc. IGV): <input type='text' name='d' value='<?=(i+1<papel.length)?papel[i+1][5]:''?>'/></p>
+              </fieldset>
+              <fieldset class='espacioVertical ajuste'>
+                <legend>Toners</legend>
+                <p>Consumo(unid.): <input type='text' name='e' value='<?=(i+1<papel.length)?papel[i+1][6]:''?>'/></p>
+                <p>Importe Total(S/. inc. IGV): <input type='text' name='f' value='<?=(i+1<papel.length)?papel[i+1][7]:''?>'/></p>
+              </fieldset>
+              
+              <fieldset class='espacioVertical ajuste'>
+                    <legend>Consideraciones/Aclaraciones</legend>
+                    <textarea class='cons' rows="3" cols="50" name='g' ><?=(i+1<papel.length)?papel[i+1][8]:''?></textarea> 
+               </fieldset>
+              
+              <input type='hidden' name='n' value='7'>
+              <input type='hidden' name='hoja' value='Papel'>
+              <input type='hidden' name='dep' value='<?=dep?>'>
+              <input type='hidden' name='mes' value='<?=(i+1)?>'>
+              <input type='button' value='Guardar' onclick="save(this.parentNode)"/>
+            </form>
+          </div>
+        <?}?>
+        
+      </div>
+  </div>
+  
+  
+  
+  <div id="tabs-7">
+    <div class="accordion">
+        <? for(var i=0;i<12;i++){?>
+          <h3><?=meses[i]?></h3>
+          <div>
+             <form>
+              
+              <fieldset class='espacioVertical ajuste'>
+                <legend>Peso de Residuos Sólidos No Peligrosos Generados</legend>
+                <p>Residuos Sólidos Organicos(kg): <input type='text' name='a' value='<?=(i+1<residuos.length)?residuos[i+1][2]:''?>'/></p>
+                <p>Residuos Sólidos Inorganicos(kg): <input type='text' name='b' value='<?=(i+1<residuos.length)?residuos[i+1][3]:''?>'/></p>
+              </fieldset>
+              <p>Peso de Residuos Sólidos Peligrosos Generados(kg): <input type='text' name='c' value='<?=(i+1<residuos.length)?residuos[i+1][4]:''?>'/></p>
+              <fieldset class='espacioVertical ajuste'>
+                    <legend>Consideraciones/Aclaraciones</legend>
+                    <textarea class='cons' rows="3" cols="50" name='d' ><?=(i+1<residuos.length)?residuos[i+1][5]:''?></textarea> 
+               </fieldset>
+              
+              <input type='hidden' name='hoja' value='Residuos'>
+              <input type='hidden' name='dep' value='<?=dep?>'>
+              <input type='hidden' name='n' value='4'>
+              <input type='button' value='Guardar' onclick="save(this.parentNode)"/>
+              <input type='hidden' name='mes' value='<?=(i+1)?>'>
+            </form>
+          </div>
+        <?}?>
+        
+      </div>
+  
+  
+    
+  </div>
+  
+  <div id="tabs-8">
+    <form>
+      
+      <p>Nombre de la Fuente Estacionaria: <input type='text' name='a'/></p>
+      <p>Tiempo de operación(hrs): <input type='text' name='b'/></p>
+      <p>Flujo de Emisión(Nm3/s): <input type='text' name='c'/></p>
+      <fieldset class='espacioVertical ajuste'>
+        <legend>Concentración Promedio de Contaminantes en las Emisiones</legend>
+        <p>Óxidos de Nitrógeno(mg / Nm3): <input type='text' name='d'/></p>
+        <p>Óxidos de Azufre(mg / Nm3): <input type='text' name='e'/></p>
+        <p>Monóxido de Carbono(mg / Nm3): <input type='text' name='f'/></p>
+        <p>Material Particulado(mg / Nm3): <input type='text' name='g'/></p>
+      </fieldset>
+      
+      <fieldset class='espacioVertical ajuste'>
+                    <legend>Consideraciones/Aclaraciones</legend>
+                    <textarea class='cons' rows="3" cols="50" name='h' ></textarea> 
+               </fieldset>
+      <input type='hidden' name='n' value='8'>
+      <input type='hidden' name='hoja' value='Emisiones'>
+      <input type='hidden' name='dep' value='<?=dep?>'><br>
+      <input type='button' value='Guardar' onclick="save(this.parentNode)"/>
+    </form>
+  </div>
+  
+  <div id="tabs-9">
+    <form>
+      
+      <p>Lugar de Ocurrencia del Derrame Significativo: <input type='text' name='a'/></p>
+      <p>Tipo de Superficie Afectada:
+        <select name='b'>
+          <option value="0">Seleccione opción</option>
+          <option value="Terrestre">Terrestre</option>
+          <option value="Acuática - Río">Acuática - Río</option>
+          <option value="Acuática - Mar">Acuática - Mar</option>
+          <option value="Subacuática - Río">Subacuática - Río</option>
+          <option value="Subacuática - Mar">Subacuática - Mar</option>
+          <option value="Otros">Otros</option>
+        </select>
+      </p>
+      
+      <p>Tipo de Derrame:
+        <select name='c'>
+          <option value="0">Seleccione opción</option>
+          <option value="Derrame de petróleo">Derrame de petróleo</option>
+          <option value="Derrame de combustible">Derrame de combustible</option>
+          <option value="Derrame de residuos">Derrame de residuos</option>
+          <option value="Derrame de productos químicos">Derrame de productos químicos</option>
+          <option value="Otros">Otros</option>
+        </select>
+      </p>
+      <p>NNombre de la Sustancia Derramada: <input type='text' name='d'/></p>
+      <p>Volumen del Derrame(bbl): <input type='text' name='e'/></p>
+      <p>Volumen Recuperado(bbl): <input type='text' name='f'/></p>
+      
+      <fieldset class='espacioVertical ajuste'>
+                    <legend>Consideraciones/Aclaraciones</legend>
+                    <textarea class='cons' rows="3" cols="50" name='g' ></textarea> 
+               </fieldset>
+      
+      <input type='hidden' name='n' value='7'>
+      <input type='hidden' name='hoja' value='Derrames'>
+      <input type='hidden' name='dep' value='<?=dep?>'><br>
+      <input type='button' value='Guardar' onclick="save(this.parentNode)"/>
+    </form>
+  </div>
+  
+  <div id="tabs-10">
+    <form>
+      <fieldset class='espacioVertical ajuste'>
+        <legend>Descargas Controladas de Efluentes</legend>
+        <p>Efluente Aceitoso(m3): <input type='text' name='a'/></p>
+        <p>Efluente Químico(m3): <input type='text' name='b'/></p>
+        <p>Efluente Doméstico(m3): <input type='text' name='c'/></p>
+        <p>Otras Descargas(m3): <input type='text' name='d'/></p>
+        
+      </fieldset>
+      
+      <p>Agua Reutilizada(m3): <input type='text' name='e'/></p>
+      
+      <fieldset class='espacioVertical ajuste'>
+                    <legend>Consideraciones/Aclaraciones</legend>
+                    <textarea class='cons' rows="3" cols="50" name='f' ></textarea> 
+               </fieldset>
+      
+      
+      <input type='hidden' name='n' value='6'>
+      <input type='hidden' name='hoja' value='Efluentes'>
+      <input type='hidden' name='dep' value='<?=dep?>'><br>
+      <input type='button' value='Guardar' onclick="save(this.parentNode)"/>
+    </form>
+  </div>
+  
+</div>
+
+<table width="100%"  border="0" cellspacing="15%" cellpadding="0">
+  <tr>
+    <td width="25%" align="left" class="opmenuizq2"></td>
+    <td width="75%" align="right" class="textopiep">PETRÓLEOS DEL PERÚ - PETROPERÚ S.A. | Ministerio de Energía y Minas | República del Perú<img src="http://www.petroperu.com.pe/portalweb/UpLoad/UpLoaded/JPG/escudo.jpg" width="19" height="20" alt="PERU"/>&nbsp;&nbsp;<br />Central telefónica: 614 5000 - Oficina Principal avenida Enrique Canaval Moreyra 150. Lima 27, Perú.<br/><a href="http://www.petroperu.com.pe/portalweb/Main.asp?Seccion=93" title="Política de protección de datos e información legal ">Política de protección de datos e información legal</a> | © Copyright 2008-2014 </td>
+  </tr>
+</table>
+
+
+<?!= include('Javascript'); ?>
+</html>
